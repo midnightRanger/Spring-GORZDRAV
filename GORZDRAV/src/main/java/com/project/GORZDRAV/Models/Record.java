@@ -2,6 +2,7 @@ package com.project.GORZDRAV.Models;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 public class Record {
@@ -21,8 +22,12 @@ public class Record {
     @ManyToOne(optional = true, cascade = CascadeType.ALL)
     private MedicalProcedure medicalProcedure;
 
+    @OneToMany(mappedBy = "record", fetch = FetchType.LAZY)
+    private Collection<Result> results = null;
 
     private String complaint;
+
+    private boolean isOpened;
 
     public Record() {
     }
@@ -90,5 +95,21 @@ public class Record {
 
     public void setComplaint(String complaint) {
         this.complaint = complaint;
+    }
+
+    public Collection<Result> getResults() {
+        return results;
+    }
+
+    public void setResults(Collection<Result> results) {
+        this.results = results;
+    }
+
+    public boolean isOpened() {
+        return isOpened;
+    }
+
+    public void setOpened(boolean opened) {
+        isOpened = opened;
     }
 }

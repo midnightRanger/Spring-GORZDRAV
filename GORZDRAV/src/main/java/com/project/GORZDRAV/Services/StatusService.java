@@ -16,7 +16,7 @@ public class StatusService {
 
     public final StatusRepository statusRepository;
 
-    public StatusService(MedicalCardRepository medicalCardRepository, StatusRepository statusRepository) {
+    public StatusService(StatusRepository statusRepository) {
         this.statusRepository = statusRepository;
     }
 

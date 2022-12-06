@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Результаты записей</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+<body>
+
+<header th:insert="/fragments/header :: headerMain"> </header>
+
+<h1> Список результатов записей</h1>
+
+<table class="table table-dark">
+  <thead>
+  <tr>
+    <th scope="col"> Анамнез </th>
+    <th scope="col"> Назначенный курс </th>
+    <th scope="col"> Жалоба </th>
+    <th scope="col"> Дата записи </th>
+    <th scope="col"> Обследование </th>
+    <th scope="col"> Редактировать </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="el : ${resultlist}" >
+    <td th:text="${el.anamnesis}"></td>
+    <td>
+      <div th:if="${el.getCourse() != null}">
+        <ul th:each="pl: ${el.getCourse().getPills()}">
+          <li> <p th:text="${pl.name}"> </p> </li>
+        </ul>
+      </div>
+      <div th:if="${el.getCourse() == null}">
+        Курс не назначен
+      </div>
+    </td>
+    <td th:text="${el.getRecord() != null} ? ${el.getRecord().complaint} : 'Жалобы отсутствовали'"></td>
+    <td th:text="${el.getRecord() != null} ? ${el.getRecord().date} : 'Дата не указана'"></td>
+    <div th:if="${el.getStatus() != null}">
+      <ul>
+        <li> <p th:text="${el.getStatus().systolic}"> </p> </li>
+        <li> <p th:text="${el.getStatus().diastolic}"> </p> </li>
+        <li> <p th:text="${el.getStatus().pulse}"> </p> </li>
+        <li> <p th:text="${el.getStatus().eyes}"> </p> </li>
+      </ul>
+    </div>
+    <div th:if="${el.getStatus() == null}">
+       Обследование не было проведено
+    </div>
+
+    <td>
+      <a th:href="'/result/result-info/' + ${el.UID}"> Редактировать </a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</div>
+
+<a href="/result/add" class="btn btn-success"> Добавить результаты </a>
+</body>
+</html>

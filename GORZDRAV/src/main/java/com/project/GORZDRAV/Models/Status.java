@@ -1,9 +1,7 @@
 package com.project.GORZDRAV.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Status {
@@ -12,18 +10,21 @@ public class Status {
     private Long UID;
 
     private double systolic;
-    private double diastrolic;
+    private double diastolic;
     private double pulse;
     private String eyes;
 
     private String finalConclusion;
 
+    @OneToMany(mappedBy = "status", fetch = FetchType.LAZY)
+    private Collection<Result> results = null;
+
     public Status() {
     }
 
-    public Status(double systolic, double diastrolic, double pulse, String eyes, String finalConclusion) {
+    public Status(double systolic, double diastolic, double pulse, String eyes, String finalConclusion) {
         this.systolic = systolic;
-        this.diastrolic = diastrolic;
+        this.diastolic = diastolic;
         this.pulse = pulse;
         this.eyes = eyes;
         this.finalConclusion = finalConclusion;
@@ -45,12 +46,12 @@ public class Status {
         this.systolic = systolic;
     }
 
-    public double getDiastrolic() {
-        return diastrolic;
+    public double getDiastolic() {
+        return diastolic;
     }
 
-    public void setDiastrolic(double diastrolic) {
-        this.diastrolic = diastrolic;
+    public void setDiastolic(double diastolic) {
+        this.diastolic = diastolic;
     }
 
     public double getPulse() {

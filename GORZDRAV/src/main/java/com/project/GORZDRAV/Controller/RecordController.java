@@ -90,6 +90,7 @@ public class RecordController {
         record.setPatient(patientObj);
         record.setMedicalCard(patientObj.getMedicalCard());
         record.setProcedure(medicalProcedureObj);
+        record.setOpened(true);
         recordService.save(record);
         return "redirect:/record/";
     }
