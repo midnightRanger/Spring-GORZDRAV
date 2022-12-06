@@ -119,7 +119,11 @@ public class ResultController {
         model.addAttribute("recordlist", recordList);
         model.addAttribute("courselist", courses);
 
-        model.addAttribute("result", resultService.findById(id).orElseThrow());
+        //TODO make filling the status fields
+        Result result = resultService.findById(id).orElseThrow();
+        Status status = statusService.findById(result.getStatus().getUID()).orElseThrow();
+        model.addAttribute("result", result);
+        model.addAttribute("status", status);
         return "result/result-add";
     }
 
@@ -136,12 +140,14 @@ public class ResultController {
         Course courseObj = courseService.findByExpectedResult(courseselect);
         Record recordObj = recordService.findByComplaint(recordselect);
 
+        status.setUID(result.getStatus().getUID());
         result.setUID(id);
         result.setCourse(courseObj);
         result.setRecord(recordObj);
         result.setStatus(status);
 
         resultService.save(result);
+        statusService.save(status);
         return "redirect:/result/";
     }
 }
