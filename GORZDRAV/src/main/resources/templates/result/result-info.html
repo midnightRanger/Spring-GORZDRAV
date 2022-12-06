@@ -22,7 +22,7 @@
         <p>Курс: </p>
         <div th:if="${result.getCourse() != null}">
           <ul th:each="pl: ${result.getCourse().getPills()}">
-            <li> <p th:text="${pl.name}"> </p> </li>
+            <li> <p th:text="${pl.getName()}"> </p> </li>
           </ul>
         </div>
         <div th:if="${result.getCourse() == null}">

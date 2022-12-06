@@ -19,4 +19,63 @@ public class Pill {
             joinColumns = @JoinColumn (name="pills_id"),
             inverseJoinColumns = @JoinColumn(name="course_id"))
     private List<Course> courses;
+
+    public Pill(String name, String contra, String normDay, double cost, List<Course> courses) {
+        this.name = name;
+        this.contra = contra;
+        this.normDay = normDay;
+        this.cost = cost;
+        this.courses = courses;
+    }
+
+    public Pill() {
+    }
+
+    public Long getUID() {
+        return UID;
+    }
+
+    public void setUID(Long UID) {
+        this.UID = UID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getContra() {
+        return contra;
+    }
+
+    public void setContra(String contra) {
+        this.contra = contra;
+    }
+
+    public String getNormDay() {
+        return normDay;
+    }
+
+    public void setNormDay(String normDay) {
+        this.normDay = normDay;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
 }

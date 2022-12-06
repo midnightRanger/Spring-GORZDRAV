@@ -29,7 +29,7 @@
     <td>
       <div th:if="${el.getCourse() != null}">
         <ul th:each="pl: ${el.getCourse().getPills()}">
-          <li> <p th:text="${pl.name}"> </p> </li>
+          <li> <p th:text="${pl.getName()}"> </p> </li>
         </ul>
       </div>
       <div th:if="${el.getCourse() == null}">
@@ -38,6 +38,7 @@
     </td>
     <td th:text="${el.getRecord() != null} ? ${el.getRecord().complaint} : 'Жалобы отсутствовали'"></td>
     <td th:text="${el.getRecord() != null} ? ${el.getRecord().date} : 'Дата не указана'"></td>
+    <td>
     <div th:if="${el.getStatus() != null}">
       <ul>
         <li> <p th:text="${el.getStatus().systolic}"> </p> </li>
@@ -49,7 +50,7 @@
     <div th:if="${el.getStatus() == null}">
        Обследование не было проведено
     </div>
-
+    </td>
     <td>
       <a th:href="'/result/result-info/' + ${el.UID}"> Редактировать </a>
     </td>
