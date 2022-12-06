@@ -1,9 +1,12 @@
 package com.project.GORZDRAV.Models;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 public class MedicalCard {
@@ -23,6 +26,10 @@ public class MedicalCard {
     @OneToOne(optional = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private User user;
+
+    @OneToMany(mappedBy = "medicalCard", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private Collection<Record> records = null;
 
     public MedicalCard() {
     }

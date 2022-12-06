@@ -37,4 +37,7 @@ public class MedicalCardService {
     public List<MedicalCard> findBySnilsContains(String snils) {
         return medicalCardRepository.findBySnilsContains(snils);
     }
+    public MedicalCard findBySnils(String snils) {
+        return medicalCardRepository.findBySnils(snils);
+    }
 }

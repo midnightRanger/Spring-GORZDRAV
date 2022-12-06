@@ -6,6 +6,7 @@ import org.springframework.lang.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -34,6 +35,12 @@ public class User {
     @OneToOne(optional = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "passportId")
     private Passport passport;
+
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    private Collection<Record> records = null;
+
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
+    private Collection<Record> recordsDoctor = null;
 
     public User() {
     }

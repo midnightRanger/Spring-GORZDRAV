@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание записи </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+<body>
+
+<header th:insert="/fragments/header :: headerMain"> </header>
+
+<h1> Создание записи </h1>
+
+<form method="post" th:object="${record}">
+    <label> Дата </label>
+    <input class="form-control" placeholder="Выберите дату записи" th:field="*{date}" type="date"  name="date">
+    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('date')}" th:errors="*{date}" style="color: darkred"> </div>
+    <label> Жалоба </label>
+    <input class="form-control" placeholder="Жалоба" type="text" th:field="*{complaint}" name="complaint">
+    <div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('complaint')}" th:errors="*{complaint}" style="color: darkred"> </div>
+
+    <label for="procedureSelect">Процедура: </label>
+    <select name="procedureselect" id="procedureSelect">
+        <div th:each="el: ${procedurelist}">
+            <option th:text="${el.name}" ></option>
+        </div>
+    </select>
+
+    <label for="patientSelect">Пациент: </label>
+    <select name="patientselect" id="patientSelect">
+        <div th:each="el: ${patientlist}">
+            <option th:text="${el.username}" ></option>
+        </div>
+    </select>
+
+    <label for="doctorSelect">Терапевт: </label>
+    <select name="doctorselect" id="doctorSelect">
+        <div th:each="el: ${doctorlist}">
+            <option  th:text="${el.username}" ></option>
+        </div>
+    </select>
+
+
+
+    <div class="modal-footer flex-column border-top-0">
+        <button class="w-100 mx-0 mb-2 btn btn-lg btn-primary" type="submit">Изменить запись</button>
+    </div>
+
+</form>
+</body>
+</html>

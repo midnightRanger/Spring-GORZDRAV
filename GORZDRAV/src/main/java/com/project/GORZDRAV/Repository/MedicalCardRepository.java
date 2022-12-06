@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface MedicalCardRepository extends CrudRepository<MedicalCard, Long> {
     public List<MedicalCard> findBySnilsContains(String snils);
+    public MedicalCard findBySnils(String snils);
 }

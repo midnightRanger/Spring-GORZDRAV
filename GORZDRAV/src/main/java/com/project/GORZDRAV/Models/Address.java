@@ -15,4 +15,6 @@ public class Address {
 
     @OneToOne(optional = true, mappedBy = "address")
     private Polyclinic polyclinic;
+
+
 }

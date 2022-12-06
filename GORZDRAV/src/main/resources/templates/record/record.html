@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Записи</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+<body>
+
+<header th:insert="/fragments/header :: headerMain"> </header>
+
+<h1> Список записей </h1>
+
+<table class="table table-dark">
+  <thead>
+  <tr>
+    <th scope="col"> Дата записи </th>
+    <th scope="col"> Жалобы </th>
+    <th scope="col"> Пациент </th>
+    <th scope="col"> Терапевт </th>
+    <th scope="col"> Снилс </th>
+    <th scope="col"> Процедура </th>
+    <th scope="col"> Редактировать </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="el : ${recordlist}" >
+    <td th:text="${el.date}"></td>
+    <td th:text="${el.complaint}"></td>
+    <td th:text="${el.getPatient() != null} ? ${el.getPatient().username} : 'Пациент'"></td>
+    <td th:text="${el.getDoctor() != null} ? ${el.getDoctor().surname} : ' Не назначен '"></td>
+    <td th:text="${el.getMedicalCard() != null} ? ${el.getMedicalCard().snils} : 'Отсутствует'"></td>
+    <td th:text="${el.getProcedure() != null} ? ${el.getProcedure().name} : 'Отсутствует'"></td>
+
+    <td>
+      <a th:href="'/record/record-info/' + ${el.UID}"> Редактировать </a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</div>
+
+<a href="/record/add" class="btn btn-success"> Добавить запись </a>
+</body>
+</html>
