@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление медкарты </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+<body>
+
+<header th:insert="/fragments/header :: headerMain"> </header>
+
+<h1> Добавить медкарту </h1>
+
+<form method="post" th:object="${medicalCard}">
+    <label> Вес </label>
+    <input class="form-control" placeholder="140 - 220 см" th:field="*{height}" type="number" step="0.01"  name="height">
+    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}" style="color: darkred"> </div>
+    <label> Рост </label>
+    <input class="form-control" placeholder="30 - 300 кг" type="number" step="0.01" th:field="*{weight}" name="weight">
+    <div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" style="color: darkred"> </div>
+    <label> Снилс </label>
+    <input class="form-control" placeholder="Снилс" type="text"  th:field="*{snils}" name="snils">
+    <div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('snils')}" th:errors="*{snils}" style="color: darkred"> </div>
+    <label> Дата Рождения </label>
+    <input class="form-control" placeholder="Дата рождения" th:field="*{dateOfTheBirth}" type="date" name="dateOfTheBirth">
+    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('dateOfTheBirth')}" th:errors="*{dateOfTheBirth}" style="color: darkred"> </div>
+
+    <label for="usernameSelect">Пользователь: </label>
+    <select name="username" id="usernameSelect">
+        <div th:each="el: ${userlist}">
+            <option th:text="${el.username}" ></option>
+        </div>
+    </select>
+
+    <label for="polyclinicSelect">Поликлиника: </label>
+    <select name="polyclinicname" id="polyclinicSelect">
+        <div th:each="el: ${polycliniclist}">
+            <option th:text="${el.name}" ></option>
+        </div>
+    </select>
+
+
+    <div class="modal-footer flex-column border-top-0">
+        <button class="w-100 mx-0 mb-2 btn btn-lg btn-primary" type="submit">Добавить медицинскую карту</button>
+    </div>
+
+</form>
+</body>
+</html>

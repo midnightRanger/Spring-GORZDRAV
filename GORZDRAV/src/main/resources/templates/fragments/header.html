@@ -1,0 +1,38 @@
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<div th:fragment="headerMain">
+<header class="p-3 text-bg-dark">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+            </a>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/home" class="nav-link px-2 text-secondary">Домашняя страница</a></li>
+                <li><a href="/calc" class="nav-link px-2 text-white">Калькулятор</a></li>
+                <li><a href="/star/" class="nav-link px-2 text-white">Звезды</a></li>
+                <li><a href="/planet/" class="nav-link px-2 text-white">Планеты</a></li>
+                <li><a href="/galactic/" class="nav-link px-2 text-white">Галактики</a></li>
+                <div sec:authorize="hasAuthority('ADMIN')">
+                <li><a href="/admin/" class="nav-link px-2 text-white">Пользователи</a></li>
+                </div>
+                <div sec:authorize="hasAuthority('MODERATOR')">
+                    <li> <a href="/moderator/" class="nav-link px-2 text-white">Роли пользователей</a></li>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    <li> Привет, <span sec:authentication="name" class="nav-link px-2 text-white"></span></li>
+                </div>
+                <li>  <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form></li>
+            </ul>
+            <form method="get" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
+                       name="keyword" aria-label="Search">
+                <input type="submit" value="Найти">
+            </form>
+        </div>
+    </div>
+</header>
+</div>

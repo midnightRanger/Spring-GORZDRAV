@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Медицинские карты</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+<body>
+
+<header th:insert="/fragments/header :: headerMain"> </header>
+
+<h1> Список медкарт </h1>
+
+<table class="table table-dark">
+  <thead>
+  <tr>
+    <th scope="col"> Дата рождения </th>
+    <th scope="col"> Рост </th>
+    <th scope="col"> Вес </th>
+    <th scope="col"> Снилс </th>
+    <th scope="col"> Логин владельца </th>
+    <th scope="col"> Поликлиника </th>
+    <th scope="col"> Редактировать </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="el : ${medicalcardlist}" >
+    <td th:text="${el.dateOfTheBirth}"></td>
+    <td th:text="${el.height}"></td>
+    <td th:text="${el.weight}"></td>
+    <td th:text="${el.snils}"></td>
+    <td th:text="${el.getUser() != null} ? ${el.getUser().username} : 'Потерялся'"></td>
+    <td th:text="${el.getPolyclinic() != null} ? ${el.getPolyclinic().name} : 'Не привязан'"></td>
+
+    <td>
+      <a th:href="'/medicalcard/medicalcard-info/' + ${el.UID}"> Редактировать </a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</div>
+
+<a href="/medicalcard/add" class="btn btn-success"> Добавить медкарту </a>
+</body>
+</html>

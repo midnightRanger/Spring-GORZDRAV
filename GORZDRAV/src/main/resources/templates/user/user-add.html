@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление пользователя </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+<body>
+
+<header th:insert="/fragments/header :: headerMain"> </header>
+
+<h1> Добавить пользователя </h1>
+
+<form method="post" th:object="${user}">
+    <label> Логин </label>
+    <input class="form-control" placeholder="Логин пользователя" th:field="*{username}" type="text"  name="username">
+    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color: darkred"> </div>
+    <label> Пароль </label>
+    <input class="form-control" placeholder="Пароль" type="text" th:field="*{password}" name="password">
+    <div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: darkred"> </div>
+    <label> Имя </label>
+    <input class="form-control" placeholder="Имя пользователя" th:field="*{name}" type="text" name="name">
+    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: darkred"> </div>
+    <label> Фамилия </label>
+    <input class="form-control" placeholder="Фамилия пользователя" th:field="*{surname}" type="text" name="surname">
+    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" style="color: darkred"> </div>
+    <label> Отчество </label>
+    <input class="form-control" placeholder="Отчество" th:field="*{middlename}" type="text" name="middlename">
+    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('middlename')}" th:errors="*{middlename}" style="color: darkred"> </div>
+    </div>
+
+    <label> Серия паспорта </label>
+    <input class="form-control" placeholder="Серия" type="text" name="series" >
+    <label> Номер паспорта </label>
+    <input class="form-control" placeholder="Номер" type="text" name="number" >
+    <label> Дата выдачи </label>
+    <input class="form-control" placeholder="Дата выдачи" type="date" name="given" >
+
+
+    <div class="modal-footer flex-column border-top-0">
+        <button class="w-100 mx-0 mb-2 btn btn-lg btn-primary" type="submit">Добавить пользователя</button>
+    </div>
+
+</form>
+</body>
+</html>
