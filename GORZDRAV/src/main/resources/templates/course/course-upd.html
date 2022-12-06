@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление нового курса </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+<body>
+
+<header th:insert="/fragments/header :: headerMain"> </header>
+
+<h1> Изменить курс </h1>
+
+<form method="post" th:object="${course}">
+    <label> Ожидаемый результат </label>
+    <input class="form-control" placeholder="Пройдут головные боли" th:field="*{expectedResult}" type="text"  name="expectedResult">
+    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('expectedResult')}" th:errors="*{expectedResult}" style="color: darkred"> </div>
+    <label> Начало </label>
+    <input class="form-control"  type="date" th:field="*{start}" name="start">
+    <div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('start')}" th:errors="*{start}" style="color: darkred"> </div>
+    <label> Конец </label>
+    <input class="form-control"  th:field="*{end}" type="date" name="end">
+    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('end')}" th:errors="*{end}" style="color: darkred"> </div>
+
+
+    <label> Включить препараты: </label>
+    <div th:each="element : ${pillslist}">
+        <label th:text="${element.name}"></label>
+        <input type="checkbox" th:id="${element}" th:name="${'pillslist[]'} "
+               th:value="${element.name}"/>
+    </div>
+
+    <div class="modal-footer flex-column border-top-0">
+        <button class="w-100 mx-0 mb-2 btn btn-lg btn-primary" type="submit">Изменить курс</button>
+    </div>
+
+</form>
+</body>
+</html>

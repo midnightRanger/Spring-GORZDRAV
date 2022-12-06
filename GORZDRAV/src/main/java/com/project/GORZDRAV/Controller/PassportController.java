@@ -95,8 +95,8 @@ public class PassportController {
     }
 
     @PostMapping("/passport-info/{id}/upd" )
-    public String updPassportPost(@PathVariable Long id, @Valid Passport passport, Model model, BindingResult bindingResult) {
-
+    public String updPassportPost(@PathVariable Long id, @Valid Passport passport,
+                                  Model model, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors())
             return "passport/passport-upd";

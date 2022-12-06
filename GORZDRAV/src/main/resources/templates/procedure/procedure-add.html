@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление процедуры </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+<body>
+
+<header th:insert="/fragments/header :: headerMain"> </header>
+
+<h1> Добавить процедуру </h1>
+
+<form method="post" th:object="${medicalProcedure}">
+    <label> Название процедуры </label>
+    <input class="form-control" placeholder="Гастэроскопия" th:field="*{name}" type="text"  name="name">
+    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: darkred"> </div>
+    <label> Описание </label>
+    <input class="form-control" placeholder="Описание" type="text" th:field="*{description}" name="description">
+    <div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color: darkred"> </div>
+    <label> Стоимость </label>
+    <input class="form-control" placeholder="300-1000000" th:field="*{cost}" type="number" step="0.01" name="given">
+    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('cost')}" th:errors="*{cost}" style="color: darkred"> </div>
+
+
+    <div class="modal-footer flex-column border-top-0">
+        <button class="w-100 mx-0 mb-2 btn btn-lg btn-primary" type="submit">Добавить процедуру</button>
+    </div>
+
+</form>
+</body>
+</html>

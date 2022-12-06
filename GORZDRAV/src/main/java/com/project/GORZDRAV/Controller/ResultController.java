@@ -124,7 +124,7 @@ public class ResultController {
         Status status = statusService.findById(result.getStatus().getUID()).orElseThrow();
         model.addAttribute("result", result);
         model.addAttribute("status", status);
-        return "result/result-add";
+        return "result/result-upd";
     }
 
     @PostMapping("/record-info/{id}/upd" )
