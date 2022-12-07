@@ -4,6 +4,7 @@ import com.project.GORZDRAV.Models.Passport;
 import com.project.GORZDRAV.Models.User;
 import com.project.GORZDRAV.Services.PassportService;
 import com.project.GORZDRAV.Services.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/passport")
+@PreAuthorize("hasAnyAuthority('ADMIN')")
 public class PassportController {
 
     final PassportService passportService;

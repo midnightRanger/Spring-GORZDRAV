@@ -1,16 +1,30 @@
 package com.project.GORZDRAV.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long UID;
-
+    @NotBlank(message="Данное поле не может состоять из пробелов")
+    @NotEmpty(message= "Данное поле не может быть пустым")
+    @Size(min = 4, max = 255, message="Длина значения должна быть в диапозоне от 4 до 255")
     private String city;
+    @NotBlank(message="Данное поле не может состоять из пробелов")
+    @NotEmpty(message= "Данное поле не может быть пустым")
+    @Size(min = 4, max = 255, message="Длина значения должна быть в диапозоне от 4 до 255")
     private String street;
+    @NotBlank(message="Данное поле не может состоять из пробелов")
+    @NotEmpty(message= "Данное поле не может быть пустым")
+    @Size(min = 4, max = 255, message="Длина значения должна быть в диапозоне от 4 до 255")
     private String building;
+    @NotBlank(message="Данное поле не может состоять из пробелов")
+    @NotEmpty(message= "Данное поле не может быть пустым")
+    @Size(min = 4, max = 255, message="Длина значения должна быть в диапозоне от 4 до 255")
     private String metro;
 
     @OneToOne(optional = true, mappedBy = "address")

@@ -1,6 +1,7 @@
 package com.project.GORZDRAV.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Collection;
 
 @Entity
@@ -9,11 +10,29 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long UID;
 
+    @NotNull(message = "Поле не может быть пустым")
+    @Min(value=50, message="Значение в поле не может быть меньше 50")
+    @Max(value=200, message="Значение в поле не может быть больше 200 (Пациент умер от инсульта)")
     private double systolic;
+
+    @NotNull(message = "Поле не может быть пустым")
+    @Min(value=40, message="Значение в поле не может быть меньше 40")
+    @Max(value=120, message="Значение в поле не может быть больше 120 ")
     private double diastolic;
+
+    @NotNull(message = "Поле не может быть пустым")
+    @Min(value=40, message="Значение в поле не может быть меньше 40")
+    @Max(value=200, message="Значение в поле не может быть больше 200")
     private double pulse;
+
+    @NotBlank
+    @NotEmpty(message = "Поле не может быть пустым")
+    @Size(min = 4, max = 255, message="Длина значения должна быть в диапозоне от 4 до 255")
     private String eyes;
 
+    @NotBlank(message="Данное поле не может состоять из пробелов")
+    @NotEmpty(message= "Данное поле не может быть пустым")
+    @Size(min = 4, max = 255, message="Длина значения должна быть в диапозоне от 4 до 255")
     private String finalConclusion;
 
     @OneToMany(mappedBy = "status", fetch = FetchType.LAZY)

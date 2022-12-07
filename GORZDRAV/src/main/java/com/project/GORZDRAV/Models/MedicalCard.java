@@ -5,6 +5,7 @@ import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.sql.Date;
 import java.util.Collection;
 
@@ -15,9 +16,19 @@ public class MedicalCard {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long UID;
 
+    @Past
     private Date dateOfTheBirth;
+    @Min(value=30, message="Значение в поле не может быть меньше 30")
+    @Max(value=120, message="Значение в поле не может быть больше 120")
     private double weight;
+    @Min(value=120, message="Значение в поле не может быть меньше 140")
+    @Max(value=230, message="Значение в поле не может быть больше 230")
     private double height;
+
+
+    @NotBlank(message="Данное поле не может состоять из пробелов")
+    @NotEmpty(message= "Данное поле не может быть пустым")
+    @Pattern(regexp = "^\\d{3}-\\d{3}-\\d{3} \\d{2}$", message = "Формат снилса: 999-999-999 00")
     private String snils;
 
     @ManyToOne(optional = true, cascade = CascadeType.ALL)

@@ -4,6 +4,7 @@ import com.project.GORZDRAV.Models.Course;
 import com.project.GORZDRAV.Models.Pill;
 import com.project.GORZDRAV.Services.CourseService;
 import com.project.GORZDRAV.Services.PillService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/course")
+@PreAuthorize("hasAnyAuthority('ADMIN','DOCTOR')")
 public class CourseController {
 
     public final CourseService courseService;

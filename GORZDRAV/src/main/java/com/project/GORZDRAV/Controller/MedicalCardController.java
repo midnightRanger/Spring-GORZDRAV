@@ -6,6 +6,7 @@ import com.project.GORZDRAV.Models.User;
 import com.project.GORZDRAV.Services.MedicalCardService;
 import com.project.GORZDRAV.Services.PolyclinicService;
 import com.project.GORZDRAV.Services.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/medicalcard")
+@PreAuthorize("hasAnyAuthority('ADMIN','DOCTOR')")
 public class MedicalCardController {
 
     final MedicalCardService medicalCardService;

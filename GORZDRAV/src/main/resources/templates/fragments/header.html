@@ -7,14 +7,25 @@
 
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <div sec:authorize="hasAnyAuthority('ADMIN','DOCTOR')">
                 <li><a href="/polyclinic/" class="nav-link px-2 text-secondary">Поликлиники</a></li>
+                </div>
+                <div sec:authorize="hasAuthority('ADMIN')">
                 <li><a href="/passport/" class="nav-link px-2 text-white">Паспортные данные</a></li>
+                </div>
+                <div sec:authorize="hasAnyAuthority('ADMIN','DOCTOR')">
                 <li><a href="/medicalcard/" class="nav-link px-2 text-white">Медкарты</a></li>
+                </div>
+                <div sec:authorize="hasAnyAuthority('ADMIN','DOCTOR')">
                 <li><a href="/course/" class="nav-link px-2 text-white">Курсы лечения</a></li>
+                </div>
+                <div sec:authorize="hasAnyAuthority('ADMIN','DOCTOR')">
                 <li><a href="/procedure/" class="nav-link px-2 text-white">Процедуры</a></li>
+                </div>
                 <li><a href="/record/" class="nav-link px-2 text-white">Записи на прием</a></li>
+                <div sec:authorize="hasAnyAuthority('ADMIN','DOCTOR')">
                 <li><a href="/result/" class="nav-link px-2 text-white">Результаты</a></li>
-                <li><a href="/admin/" class="nav-link px-2 text-white">Пользователи</a></li>
+                </div>
                 <div sec:authorize="hasAuthority('ADMIN')">
                 <li><a href="/admin/" class="nav-link px-2 text-white">Пользователи</a></li>
                 </div>

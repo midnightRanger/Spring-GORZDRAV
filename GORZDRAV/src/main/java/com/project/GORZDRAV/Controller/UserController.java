@@ -5,6 +5,7 @@ import com.project.GORZDRAV.Models.User;
 import com.project.GORZDRAV.Services.PassportService;
 import com.project.GORZDRAV.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
-//@PreAuthorize("hasAnyAuthority('ADMIN')")
+@PreAuthorize("hasAnyAuthority('ADMIN')")
 public class UserController {
     final UserService userService;
     final PassportService passportService;

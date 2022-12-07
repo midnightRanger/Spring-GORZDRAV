@@ -1,6 +1,9 @@
 package com.project.GORZDRAV.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
@@ -10,6 +13,9 @@ public class Polyclinic {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long UID;
 
+    @NotBlank(message="Данное поле не может состоять из пробелов")
+    @NotEmpty(message= "Данное поле не может быть пустым")
+    @Size(min = 4, max = 255, message="Длина значения должна быть в диапозоне от 4 до 255")
     private String name;
 
 

@@ -4,6 +4,7 @@ import com.project.GORZDRAV.Models.*;
 import com.project.GORZDRAV.Models.Record;
 import com.project.GORZDRAV.Services.AddressService;
 import com.project.GORZDRAV.Services.PolyclinicService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/polyclinic")
+@PreAuthorize("hasAnyAuthority('ADMIN','DOCTOR')")
 public class PolyclinicController {
 
     public final PolyclinicService polyclinicService;

@@ -1,6 +1,7 @@
 package com.project.GORZDRAV.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Past;
 import java.sql.Date;
 
 @Entity
@@ -11,6 +12,7 @@ public class Passport {
 
     private String series;
     private String number;
+    @Past(message = "Паспорт тебе выдадут попозже? Ну-ну")
     private Date given;
 
     @OneToOne(optional = true, mappedBy = "passport")

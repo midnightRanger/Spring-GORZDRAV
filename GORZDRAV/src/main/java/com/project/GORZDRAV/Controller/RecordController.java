@@ -6,12 +6,16 @@ import com.project.GORZDRAV.Services.MedicalCardService;
 import com.project.GORZDRAV.Services.ProcedureService;
 import com.project.GORZDRAV.Services.RecordService;
 import com.project.GORZDRAV.Services.UserService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,10 +36,23 @@ public class RecordController {
     }
 
     @GetMapping("/")
-    public String getRecords(@RequestParam(defaultValue = "") String keyword, Model model) {
+    public String getRecords(@RequestParam(required = false) String keyword, Model model,
+                             Authentication authentication, Principal principal) {
 
-        if (keyword == "") {
-            Iterable<Record> recortIterable = recordService.findAll();
+        Iterable<Record> recortIterable = recordService.findAll();
+
+        ArrayList<Record> userRecords = new ArrayList<Record>();
+        if (keyword == "" || keyword == null) {
+
+            if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("USER"))) {
+                for (var record : recortIterable) {
+                    if (record.getPatient().getUsername().equals(principal.getName())) {
+                        userRecords.add(record);
+                    }
+                }
+                model.addAttribute("recordlist", userRecords);
+            }
+            else
             model.addAttribute("recordlist", recortIterable);
         }
 
@@ -47,7 +64,7 @@ public class RecordController {
     }
 
     @GetMapping("/add")
-    public String addRecordView(Record record, Model model) {
+    public String addRecordView(Record record, Authentication authentication, Principal principal, Model model) {
 
         Iterable<User> users = userService.findAll();
         Iterable<MedicalProcedure> procedures = procedureService.findAll();
@@ -64,6 +81,13 @@ public class RecordController {
                 }
             }
         }
+
+        if(authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("USER"))) {
+            patientList.clear();
+            patientList.add(userService.findByUsername(principal.getName()));
+        }
+
+
         model.addAttribute("patientlist", patientList);
         model.addAttribute("doctorlist", doctorList);
         model.addAttribute("procedurelist", procedures);

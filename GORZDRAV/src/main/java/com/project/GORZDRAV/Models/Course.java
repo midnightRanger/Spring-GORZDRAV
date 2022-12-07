@@ -1,6 +1,10 @@
 package com.project.GORZDRAV.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
@@ -11,8 +15,13 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long UID;
 
+    @NotBlank(message="Данное поле не может состоять из пробелов")
+    @NotEmpty(message= "Данное поле не может быть пустым")
+    @Size(min = 4, max = 50, message="Длина значения должна быть в диапозоне от 4 до 50")
     private String expectedResult;
+    @FutureOrPresent
     private Date start;
+    @FutureOrPresent
     private Date end;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)

@@ -3,6 +3,7 @@ package com.project.GORZDRAV.Controller;
 import com.project.GORZDRAV.Models.*;
 import com.project.GORZDRAV.Models.Record;
 import com.project.GORZDRAV.Services.ProcedureService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/procedure")
+@PreAuthorize("hasAnyAuthority('ADMIN','DOCTOR')")
 public class ProcedureController {
     public final ProcedureService procedureService;
 

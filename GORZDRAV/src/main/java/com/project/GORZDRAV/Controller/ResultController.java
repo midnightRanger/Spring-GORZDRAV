@@ -6,6 +6,7 @@ import com.project.GORZDRAV.Services.CourseService;
 import com.project.GORZDRAV.Services.RecordService;
 import com.project.GORZDRAV.Services.ResultService;
 import com.project.GORZDRAV.Services.StatusService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/result")
+@PreAuthorize("hasAnyAuthority('ADMIN','DOCTOR')")
 public class ResultController {
     public final ResultService resultService;
     public final RecordService recordService;

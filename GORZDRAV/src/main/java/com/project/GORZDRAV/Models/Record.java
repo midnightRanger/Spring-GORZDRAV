@@ -1,6 +1,10 @@
 package com.project.GORZDRAV.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.util.Collection;
 
@@ -10,6 +14,7 @@ public class Record {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long UID;
 
+    @FutureOrPresent(message = "Время записи не может быть прошедшим!")
     private Date date;
     @ManyToOne(optional = true, cascade = CascadeType.ALL)
     private User patient;
@@ -25,6 +30,9 @@ public class Record {
     @OneToMany(mappedBy = "record", fetch = FetchType.LAZY)
     private Collection<Result> results = null;
 
+    @NotBlank(message="Данное поле не может состоять из пробелов")
+    @NotEmpty(message= "Данное поле не может быть пустым")
+    @Size(min = 4, max = 255, message="Длина значения должна быть в диапозоне от 4 до 255")
     private String complaint;
 
     private boolean isOpened;
