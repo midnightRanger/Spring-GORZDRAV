@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление поликлиники </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+<body>
+
+<header th:insert="/fragments/header :: headerMain"> </header>
+
+<h1> Добавить поликлинику </h1>
+
+<form method="post" th:object="${polyclinic}">
+    <label> Название поликлиники </label>
+    <input class="form-control" placeholder="Государственная им. Сеченова" th:field="*{name}" type="text"  name="name">
+    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: darkred"> </div>
+    <label> Город </label>
+    <input class="form-control" placeholder="Город" type="text"  name="city">
+    <label> Улица </label>
+    <input class="form-control" placeholder="пр. Дежнева"  type="text"  name="street">
+    <label> Строение </label>
+    <input class="form-control" placeholder="стр. 1"  type="text" name="building">
+    <label> Метро </label>
+    <input class="form-control" placeholder="Отрадное"  type="text" name="metro">
+
+    <label> Типы: </label>
+    <div th:each="element : ${types}">
+        <label th:text="${element}"></label>
+        <input type="checkbox" th:id="${element}" th:name="${'types[]'}"
+               th:value="${element}"/>
+    </div>
+
+
+    <div class="modal-footer flex-column border-top-0">
+        <button class="w-100 mx-0 mb-2 btn btn-lg btn-primary" type="submit">Добавить поликлинику</button>
+    </div>
+
+</form>
+</body>
+</html>
