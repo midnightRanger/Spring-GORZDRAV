@@ -15,10 +15,31 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long UID;
 
+    @NotBlank(message="Данное поле не может состоять из пробелов")
+    @NotEmpty(message= "Данное поле не может быть пустым")
+    @Size(min = 4, max = 50, message="Длина значения должна быть в диапозоне от 4 до 50")
     private String username;
+    @NotBlank(message="Данное поле не может состоять из пробелов")
+    @NotEmpty(message= "Данное поле не может быть пустым")
+    @Size(min = 5, max = 2000, message="Длина пароля должна быть в диапозоне от 5 до 50")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{5,}$", message = "Проверьте пароль " +
+            "на соответствие требованиям: \n1) Наличие хотя бы одной цифры" +
+            "\n2) Наличие хотя бы одной строчной буквы" +
+            "\n3) Наличие хотя бы одной заглавной буквы" +
+            "\n4) Наличие спец. символа - @#$%^&+=" +
+            "\n5) Длина - от 5 до 50 символов")
     private String password;
+    @NotBlank(message="Данное поле не может состоять из пробелов")
+    @NotEmpty(message= "Данное поле не может быть пустым")
+    @Size(min = 2, max = 50, message="Длина значения должна быть в диапозоне от 2 до 50")
     private String name;
+    @NotBlank(message="Данное поле не может состоять из пробелов")
+    @NotEmpty(message= "Данное поле не может быть пустым")
+    @Size(min = 4, max = 50, message="Длина значения должна быть в диапозоне от 4 до 50")
     private String surname;
+    @NotBlank(message="Данное поле не может состоять из пробелов")
+    @NotEmpty(message= "Данное поле не может быть пустым")
+    @Size(min = 4, max = 50, message="Длина значения должна быть в диапозоне от 4 до 50")
     private String middlename;
 
     @OneToOne(optional = true, mappedBy = "user")
